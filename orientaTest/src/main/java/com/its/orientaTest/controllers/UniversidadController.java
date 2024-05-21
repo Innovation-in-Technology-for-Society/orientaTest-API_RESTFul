@@ -29,4 +29,10 @@ public class UniversidadController {
         List<UniversidadResponseDTO> universidades = universidadService.getAllUniversidades();
         return new ResponseEntity<>(universidades, HttpStatus.OK);
     }
+
+    @GetMapping("/{nombre}")
+    public ResponseEntity<UniversidadResponseDTO> getUniversidadByNombre(@PathVariable String nombre){
+        UniversidadResponseDTO universidad = universidadService.getUniversidadByNombre(nombre);
+        return new ResponseEntity<>(universidad, HttpStatus.OK);
+    }
 }
