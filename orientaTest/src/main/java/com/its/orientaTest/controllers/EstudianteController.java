@@ -31,4 +31,10 @@ public class EstudianteController {
         List<EstudianteResponseDTO> estudiantes = estudianteService.getAllEstudiantes();
         return new ResponseEntity<>(estudiantes, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEstudiante(@PathVariable Long id){
+        estudianteService.deleteEstudiante(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
