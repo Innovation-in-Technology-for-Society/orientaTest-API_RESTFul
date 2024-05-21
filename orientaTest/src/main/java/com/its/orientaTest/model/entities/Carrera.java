@@ -20,4 +20,7 @@ public class Carrera {
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
+    
+    @Column(name = "inversion", nullable = false)
+    private String inversion;
 }
