@@ -37,4 +37,17 @@ public class EstudianteController {
         estudianteService.deleteEstudiante(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/autenticar")
+    public ResponseEntity<EstudianteResponseDTO> autenticarEstudiante(@RequestBody EstudianteRequestDTO estudianteRequestDTO) {
+        // Obtener los datos de correo y contraseña del cuerpo de la solicitud
+        String correoElectronico = estudianteRequestDTO.getCorreoElectronico();
+        String contrasenia = estudianteRequestDTO.getContrasenia();
+        
+        // Autentica al estudiante
+        EstudianteResponseDTO estudianteAutenticado = estudianteService.autenticarEstudiante(correoElectronico, contrasenia);
+        
+        // Devuelve los datos del estudiante autenticado
+        return ResponseEntity.ok(estudianteAutenticado);
+    }
 }
