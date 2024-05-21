@@ -59,4 +59,9 @@ public class UniversidadService {
         universidad = universidadRepository.save(universidad);
         return universidadMapper.toDTO(universidad);
     }
+
+    @Transactional
+    public void deleteUniversidad(Long id){
+        universidadRepository.deleteById(id);
+    }
 }
