@@ -32,4 +32,10 @@ public class UniversidadService {
         universidadRepository.save(universidad);
         return universidadMapper.toDTO(universidad);
     }
+
+    @Transactional(readOnly = true)
+    public List<UniversidadResponseDTO> getAllUniversidades(){
+        List<Universidad> universidades = universidadRepository.findAll();
+        return universidadMapper.toListDTO(universidades);
+    }
 }
