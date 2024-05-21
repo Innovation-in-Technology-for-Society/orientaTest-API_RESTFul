@@ -35,4 +35,11 @@ public class CarreraController {
         CarreraResponseDTO carrera = carreraService.getCarreraByNombre(nombre);
         return new ResponseEntity<>(carrera, HttpStatus.OK);
     }
+
+    @PutMapping("/{nombre}")
+    public ResponseEntity<CarreraResponseDTO> updateCarrera(@PathVariable String nombre,
+                                                            @Validated @RequestBody CarreraRequestDTO carreraRequestDTO){
+        CarreraResponseDTO updatedCarrera = carreraService.updateCarrera(nombre, carreraRequestDTO);
+        return new ResponseEntity<>(updatedCarrera, HttpStatus.OK);
+    }
 }
