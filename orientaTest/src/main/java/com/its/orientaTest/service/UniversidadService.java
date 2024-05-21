@@ -45,4 +45,18 @@ public class UniversidadService {
         .orElseThrow(() -> new ResourceNotFoundException("Universidad no encontrada con nombre: " + nombre));
         return universidadMapper.toDTO(universidad);
     }
+
+    @Transactional
+    public UniversidadResponseDTO updateUniversidad(String nombre, UniversidadRequestDTO universidadRequestDTO){
+        Universidad universidad = universidadRepository.findByNombre(nombre)
+        .orElseThrow(() -> new ResourceNotFoundException("Universidad no encontrada con nombre: " + nombre));
+
+        universidad.setCorreoElectronico(universidadRequestDTO.getCorreoElectronico());
+        universidad.setTelefono(universidadRequestDTO.getTelefono());
+        universidad.setUbicacion(universidadRequestDTO.getUbicacion());
+        universidad.setRanking(universidadRequestDTO.getRanking());
+
+        universidad = universidadRepository.save(universidad);
+        return universidadMapper.toDTO(universidad);
+    }
 }
