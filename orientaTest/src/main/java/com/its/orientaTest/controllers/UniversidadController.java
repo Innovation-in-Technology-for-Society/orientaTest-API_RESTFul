@@ -43,4 +43,9 @@ public class UniversidadController {
         return new ResponseEntity<>(updatedUniversidad, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUniversidad(@PathVariable Long id){
+        universidadService.deleteUniversidad(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
