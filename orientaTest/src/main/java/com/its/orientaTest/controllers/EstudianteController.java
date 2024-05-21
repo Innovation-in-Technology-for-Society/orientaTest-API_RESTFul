@@ -25,4 +25,10 @@ public class EstudianteController {
         EstudianteResponseDTO createdEstudiante = estudianteService.createEstudiante(estudianteRequestDTO);
         return new ResponseEntity<>(createdEstudiante, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<EstudianteResponseDTO>> getAllEstudiantes(){
+        List<EstudianteResponseDTO> estudiantes = estudianteService.getAllEstudiantes();
+        return new ResponseEntity<>(estudiantes, HttpStatus.OK);
+    }
 }
