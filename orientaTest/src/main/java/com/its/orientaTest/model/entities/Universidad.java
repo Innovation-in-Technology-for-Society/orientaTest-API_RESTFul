@@ -29,4 +29,7 @@ public class Universidad {
 
     @Column(name = "ranking", nullable = false)
     private Integer ranking;
+    
+    @Column(name = "beneficio", nullable = false)
+    private String beneficio;
 }
