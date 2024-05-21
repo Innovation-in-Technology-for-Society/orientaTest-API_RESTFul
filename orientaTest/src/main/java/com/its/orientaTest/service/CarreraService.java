@@ -31,4 +31,17 @@ public class CarreraService {
         carreraRepository.save(carrera);
         return carreraMapper.toDTO(carrera);
     }
+
+    @Transactional(readOnly = true)
+    public List<CarreraResponseDTO> getAllCarreras(){
+        List<Carrera> carreras = carreraRepository.findAll();
+        return carreraMapper.toListDTO(carreras);
+    }
+
+    @Transactional(readOnly = true)
+    public CarreraResponseDTO getCarreraByNombre(String nombre){
+        Carrera carrera = carreraRepository.findByNombre(nombre)
+        .orElseThrow(() -> new ResourceNotFoundException("Carrera no encontrada con nombre: " + nombre));
+        return carreraMapper.toDTO(carrera);
+    }
 }
