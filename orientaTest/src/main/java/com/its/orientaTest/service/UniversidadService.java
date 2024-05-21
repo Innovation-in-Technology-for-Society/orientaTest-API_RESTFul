@@ -38,4 +38,11 @@ public class UniversidadService {
         List<Universidad> universidades = universidadRepository.findAll();
         return universidadMapper.toListDTO(universidades);
     }
+
+    @Transactional(readOnly = true)
+    public UniversidadResponseDTO getUniversidadByNombre(String nombre){
+        Universidad universidad = universidadRepository.findByNombre(nombre)
+        .orElseThrow(() -> new ResourceNotFoundException("Universidad no encontrada con nombre: " + nombre));
+        return universidadMapper.toDTO(universidad);
+    }
 }
