@@ -35,4 +35,12 @@ public class UniversidadController {
         UniversidadResponseDTO universidad = universidadService.getUniversidadByNombre(nombre);
         return new ResponseEntity<>(universidad, HttpStatus.OK);
     }
+
+    @PutMapping("/{nombre}")
+    public ResponseEntity<UniversidadResponseDTO> updateUniversidad(@PathVariable String nombre,
+                                                                    @Validated @RequestBody UniversidadRequestDTO universidadRequestDTO){
+        UniversidadResponseDTO updatedUniversidad = universidadService.updateUniversidad(nombre, universidadRequestDTO);
+        return new ResponseEntity<>(updatedUniversidad, HttpStatus.OK);
+    }
+
 }
