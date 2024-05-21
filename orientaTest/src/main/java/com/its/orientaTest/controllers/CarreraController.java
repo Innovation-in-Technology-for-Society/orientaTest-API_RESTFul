@@ -42,4 +42,10 @@ public class CarreraController {
         CarreraResponseDTO updatedCarrera = carreraService.updateCarrera(nombre, carreraRequestDTO);
         return new ResponseEntity<>(updatedCarrera, HttpStatus.OK);
     }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCarrera(@PathVariable Long id){
+        carreraService.deleteCarrera(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
