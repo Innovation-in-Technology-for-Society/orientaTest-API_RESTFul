@@ -50,4 +50,13 @@ public class EstudianteController {
         // Devuelve los datos del estudiante autenticado
         return ResponseEntity.ok(estudianteAutenticado);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EstudianteResponseDTO> actualizarEstudiante(
+            @PathVariable Long id, 
+            @RequestBody EstudianteRequestDTO estudianteRequestDTO) {
+        
+        EstudianteResponseDTO estudianteActualizado = estudianteService.actualizarEstudiante(id, estudianteRequestDTO);
+        return ResponseEntity.ok(estudianteActualizado);
+    }
 }
