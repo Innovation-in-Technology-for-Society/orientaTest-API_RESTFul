@@ -43,4 +43,22 @@ public class EstudianteService {
         .orElseThrow(() -> new ResourceNotFoundException("Estudiante nombre:" + nombre + "apellido:" + apellido + "no encontrado"));
         return estudianteMapper.toDTO(estudiante);
     }
+    @Transactional
+    public void deleteEstudiante(Long id){
+        estudianteRepository.deleteById(id);
+    }
+    
+    public EstudianteResponseDTO autenticarEstudiante(String correoElectronico, String contrasenia) {
+        // Busca el estudiante por correo electrónico
+        Estudiante estudiante = estudianteRepository.findByCorreoElectronico(correoElectronico)
+                .orElseThrow(() -> new ResourceNotFoundException("Estudiante no encontrado con correo: " + correoElectronico));
+        
+        // Verifica que la contraseña coincida
+        if (!estudiante.getContrasenia().equals(contrasenia)) {
+            throw new BadRequestException("Correo electrónico o contraseña incorrectos.");
+        }
+        
+        // Convierte la entidad Estudiante a EstudianteResponseDTO y devuélvela
+        return estudianteMapper.toDTO(estudiante);
+    }
 }
