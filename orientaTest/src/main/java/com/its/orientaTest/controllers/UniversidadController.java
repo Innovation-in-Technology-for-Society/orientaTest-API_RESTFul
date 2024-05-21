@@ -23,4 +23,10 @@ public class UniversidadController {
         UniversidadResponseDTO createdUniversidad = universidadService.createUniversidad(universidadRequestDTO);
         return new ResponseEntity<>(createdUniversidad, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<UniversidadResponseDTO>> getAllUniversidades(){
+        List<UniversidadResponseDTO> universidades = universidadService.getAllUniversidades();
+        return new ResponseEntity<>(universidades, HttpStatus.OK);
+    }
 }
