@@ -31,5 +31,16 @@ public class EstudianteService {
         estudianteRepository.save(estudiante);
         return estudianteMapper.toDTO(estudiante);
     }
+    @Transactional(readOnly = true)
+    public List<EstudianteResponseDTO> getAllEstudiantes(){
+        List<Estudiante> estudiantes = estudianteRepository.findAll();
+        return estudianteMapper.toListDTO(estudiantes);
+    }
 
+    @Transactional(readOnly = true)
+    public EstudianteResponseDTO getEstudianteByNombreApellido(String nombre, String apellido){
+        Estudiante estudiante = estudianteRepository.findByNombreApellido(nombre, apellido)
+        .orElseThrow(() -> new ResourceNotFoundException("Estudiante nombre:" + nombre + "apellido:" + apellido + "no encontrado"));
+        return estudianteMapper.toDTO(estudiante);
+    }
 }
