@@ -56,4 +56,8 @@ public class CarreraService {
         return carreraMapper.toDTO(carrera);
     }
 
+    @Transactional
+    public void deleteCarrera(Long id){
+        carreraRepository.deleteById(id);
+    }
 }
