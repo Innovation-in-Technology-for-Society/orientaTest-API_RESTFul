@@ -23,4 +23,11 @@ public class ResultadoService {
         List<Resultado> resultados = resultadoRepository.findAll();
         return resultadoMapper.toListDTO(resultados);
     }
+
+    @Transactional(readOnly = true)
+    public ResultadoResponseDTO getResultadoByTestId(Long test_id){
+        Resultado resultado = resultadoRepository.findByTestId(test_id)
+        .orElseThrow(() -> new ResourceNotFoundException("Resultado del test " + test_id + "no encontrado"));
+        return resultadoMapper.toDTO(resultado);
+    }
 }
