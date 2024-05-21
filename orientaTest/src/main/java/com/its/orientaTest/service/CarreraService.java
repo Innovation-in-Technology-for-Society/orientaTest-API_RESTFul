@@ -44,4 +44,16 @@ public class CarreraService {
         .orElseThrow(() -> new ResourceNotFoundException("Carrera no encontrada con nombre: " + nombre));
         return carreraMapper.toDTO(carrera);
     }
+
+    @Transactional
+    public CarreraResponseDTO updateCarrera(String nombre, CarreraRequestDTO carreraRequestDTO){
+        Carrera carrera = carreraRepository.findByNombre(nombre)
+        .orElseThrow(() -> new ResourceNotFoundException("Carrera no encontrada"));
+
+        carrera.setDescripcion(carreraRequestDTO.getDescripcion());
+
+        carrera = carreraRepository.save(carrera);
+        return carreraMapper.toDTO(carrera);
+    }
+
 }
