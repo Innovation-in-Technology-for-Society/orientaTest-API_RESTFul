@@ -21,4 +21,10 @@ public class ResultadoController {
         List<ResultadoResponseDTO> resultados = resultadoService.getAllResultados();
         return new ResponseEntity<>(resultados, HttpStatus.OK);
     }
+
+    @GetMapping("/{test_id}")
+    public ResponseEntity<ResultadoResponseDTO> getResultadoByTestId(@PathVariable Long test_id){
+        ResultadoResponseDTO resultado = resultadoService.getResultadoByTestId(test_id);
+        return new ResponseEntity<>(resultado, HttpStatus.OK);
+    }
 }
