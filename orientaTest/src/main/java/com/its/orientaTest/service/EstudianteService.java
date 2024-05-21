@@ -47,7 +47,7 @@ public class EstudianteService {
     public void deleteEstudiante(Long id){
         estudianteRepository.deleteById(id);
     }
-    
+
     public EstudianteResponseDTO autenticarEstudiante(String correoElectronico, String contrasenia) {
         // Busca el estudiante por correo electrónico
         Estudiante estudiante = estudianteRepository.findByCorreoElectronico(correoElectronico)
@@ -59,6 +59,21 @@ public class EstudianteService {
         }
         
         // Convierte la entidad Estudiante a EstudianteResponseDTO y devuélvela
+        return estudianteMapper.toDTO(estudiante);
+    }
+
+    public EstudianteResponseDTO actualizarEstudiante(Long id, EstudianteRequestDTO estudianteRequestDTO) {
+        // Buscar el estudiante por ID
+        Estudiante estudiante = estudianteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Estudiante no encontrado con ID: " + id));
+        
+        // Actualizar los datos del estudiante con los datos del DTO
+        estudianteMapper.updateEntity(estudiante, estudianteRequestDTO);
+        
+        // Guardar los cambios
+        estudiante = estudianteRepository.save(estudiante);
+        
+        // Convertir el estudiante actualizado a EstudianteResponseDTO
         return estudianteMapper.toDTO(estudiante);
     }
 }
