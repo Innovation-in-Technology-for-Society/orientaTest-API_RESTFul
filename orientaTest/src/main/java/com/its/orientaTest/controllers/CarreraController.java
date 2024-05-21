@@ -23,4 +23,16 @@ public class CarreraController {
         CarreraResponseDTO createdCarrera = carreraService.createCarrera(carreraRequestDTO);
         return new ResponseEntity<>(createdCarrera, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<CarreraResponseDTO>> getAllCarreras(){
+        List<CarreraResponseDTO> carreras = carreraService.getAllCarreras();
+        return new ResponseEntity<>(carreras, HttpStatus.OK);
+    }
+
+    @GetMapping("/{nombre}")
+    public ResponseEntity<CarreraResponseDTO> getCarreraByNombre(@PathVariable String nombre){
+        CarreraResponseDTO carrera = carreraService.getCarreraByNombre(nombre);
+        return new ResponseEntity<>(carrera, HttpStatus.OK);
+    }
 }
