@@ -14,5 +14,11 @@ import java.util.List;
 @RequestMapping("/resultados")
 @AllArgsConstructor
 public class ResultadoController {
+    private final ResultadoService resultadoService;
 
+    @GetMapping
+    public ResponseEntity<List<ResultadoResponseDTO>> getAllResultados(){
+        List<ResultadoResponseDTO> resultados = resultadoService.getAllResultados();
+        return new ResponseEntity<>(resultados, HttpStatus.OK);
+    }
 }
