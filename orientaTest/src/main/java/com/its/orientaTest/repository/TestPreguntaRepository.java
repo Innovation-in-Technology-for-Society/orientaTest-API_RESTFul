@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.its.orientaTest.model.entities.TestPregunta;
 
 public interface TestPreguntaRepository extends JpaRepository<TestPregunta, Long> {
-        
+    List<TestPregunta> findByTestIdAndTipoTest(Long test_id, String tipoTest);
 }
