@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.its.orientaTest.mapper.TestPreguntaMapper;
 import com.its.orientaTest.model.dto.PreguntaResponseDTO;
 import com.its.orientaTest.model.dto.TestPreguntaResponseDTO;
 import com.its.orientaTest.repository.TestPreguntaRepository;
@@ -17,6 +18,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class TestPreguntaService {
+    private final TestPreguntaMapper testPreguntaMapper;
     private final TestPreguntaRepository testPreguntaRepository;
 
     @Transactional(readOnly = true)
