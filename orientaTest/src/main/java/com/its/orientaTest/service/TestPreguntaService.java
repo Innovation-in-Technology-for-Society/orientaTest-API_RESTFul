@@ -17,5 +17,23 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class TestPreguntaService {
-    
+    private final TestPreguntaRepository testPreguntaRepository;
+
+    @Transactional(readOnly = true)
+    public List<TestPreguntaResponseDTO> getResultadosAutoPercepcion(Long testId, String tipoTest) {
+        List<TestPregunta> preguntas = testPreguntaRepository.findByTestIdAndTipoTest(testId, tipoTest);
+        return preguntas.stream()
+                .map(this::mapToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    private TestPreguntaResponseDTO mapToResponseDTO(TestPregunta testPregunta) {
+        TestPreguntaResponseDTO dto = testPreguntaMapper.toDTO(testPregunta);
+        Pregunta pregunta = testPregunta.getPregunta();
+        PreguntaResponseDTO preguntaDTO = new PreguntaResponseDTO();
+        preguntaDTO.setId(pregunta.getId());
+        preguntaDTO.setEnunciado(pregunta.getEnunciado());
+        dto.setPregunta_id(preguntaDTO);
+        return dto;
+    }
 }
