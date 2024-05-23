@@ -14,5 +14,4 @@ public class UniversidadResponseDTO {
     private String telefono;
     private String ubicacion;
     private Integer ranking;
-    private String beneficio;
 }
