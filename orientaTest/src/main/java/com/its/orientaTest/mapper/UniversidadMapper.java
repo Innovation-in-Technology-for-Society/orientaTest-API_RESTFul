@@ -31,5 +31,7 @@ public class UniversidadMapper {
         return modelMapper.map(universidad, UniversidadPrecisaResponseDTO.class);
     }
 
-    
+    public List<UniversidadPrecisaResponseDTO> toListDTOPrecisa(List<Universidad> universidades){
+        return universidades.stream().map(this::toDTOPrecisa).toList();
+    }
 }
