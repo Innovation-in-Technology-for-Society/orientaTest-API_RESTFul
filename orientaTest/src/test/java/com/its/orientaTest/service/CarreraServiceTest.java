@@ -1,6 +1,7 @@
 package com.its.orientaTest.service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
 
 import com.its.orientaTest.exceptions.ResourceDuplicateException;
@@ -21,6 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Collections;
 
 @ExtendWith(MockitoExtension.class)
 public class CarreraServiceTest {
@@ -58,5 +60,22 @@ public class CarreraServiceTest {
 
         verify(carreraRepository, times(1)).findAll();
         verify(carreraMapper, times(1)).toListDTO(carreraList);
+    }
+
+    @Test
+    public void testGetAllCarreras_NoCarrerasFound() {
+        // Arrange
+        when(carreraRepository.findAll()).thenReturn(Collections.emptyList());
+        when(carreraMapper.toListDTO(anyList())).thenReturn(Collections.emptyList());
+
+        // Act
+        List<CarreraResponseDTO> result = carreraService.getAllCarreras();
+
+        // Assert
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+
+        verify(carreraRepository, times(1)).findAll();
+        verify(carreraMapper, times(1)).toListDTO(anyList());
     }
 }
