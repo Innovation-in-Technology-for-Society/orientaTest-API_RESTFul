@@ -76,4 +76,14 @@ public class ResultadoServiceTest {
         assertNotNull(result.getCarreraUniversidad());
         assertEquals(1L, result.getCarreraUniversidad().getId());
     }
+
+    @Test 
+    public void testGetResultadoByTestId_NonExistingId(){
+        // Arrange
+        Long test_id = 2L;
+        when(resultadoRepository.findByTestId(test_id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> resultadoService.getResultadoByTestId(test_id));
+    }
 }
