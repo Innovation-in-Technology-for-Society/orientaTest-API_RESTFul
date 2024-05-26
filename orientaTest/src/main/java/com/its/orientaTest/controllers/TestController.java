@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/tests")
 @AllArgsConstructor
@@ -20,5 +22,11 @@ public class TestController {
     public ResponseEntity<TestResponseDTO> startTest(@Validated @RequestBody TestRequestDTO testRequestDTO){
         TestResponseDTO takenTest = testService.startTest(testRequestDTO);
         return new ResponseEntity<>(takenTest, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TestResponseDTO>> getAllTests(){
+        List<TestResponseDTO> tests = testService.getAllTests();
+        return new ResponseEntity<>(tests, HttpStatus.OK);
     }
 }
