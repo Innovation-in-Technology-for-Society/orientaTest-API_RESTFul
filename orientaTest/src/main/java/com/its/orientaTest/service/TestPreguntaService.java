@@ -58,4 +58,19 @@ public class TestPreguntaService {
             testPregunta = testPreguntaRepository.save(testPregunta);
         }
     }
+    
+    @Transactional
+    public TestPreguntaResponseDTO answerPregunta(Long test_id, Long id, TestPreguntaRequestDTO testPreguntaRequestDTO){
+        Test test = testRepository.findById(test_id)
+        .orElseThrow(() -> new ResourceNotFoundException("No existe el Test con id " + test_id));
+
+        TestPregunta testPregunta = testPreguntaRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("No existe la pregunta"));
+
+        testPregunta.setTest(test);
+        testPregunta.setValor(testPreguntaRequestDTO.getValor());
+        testPregunta = testPreguntaRepository.save(testPregunta);
+
+        return testPreguntaMapper.toDTO(testPregunta);
+    }
 }
