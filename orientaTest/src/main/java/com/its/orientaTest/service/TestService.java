@@ -45,3 +45,10 @@ public class TestService {
 
         return testMapper.toDTO(test);
     }
+    
+    @Transactional(readOnly = true)
+    public List<TestResponseDTO> getAllTests(){
+        List<Test> tests = testRepository.findAll();
+        return testMapper.toListDTO(tests);
+    }
+}
