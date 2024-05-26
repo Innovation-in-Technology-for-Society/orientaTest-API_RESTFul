@@ -17,10 +17,10 @@ public class TestPreguntaController {
     private final TestPreguntaService testPreguntaService;
 
     @GetMapping("/{test_id}/{tipoTest}")
-    public ResponseEntity<List<TestPreguntaResponseDTO>> getResultadosAutoPercepcion(
+    public ResponseEntity<List<TestPreguntaResponseDTO>> getResultadosTipoTest(
             @PathVariable("test_id") Long test_id,
             @PathVariable("tipoTest") String tipoTest) {
-        List<TestPreguntaResponseDTO> resultados = testPreguntaService.getResultadosAutoPercepcion(test_id, tipoTest);
+        List<TestPreguntaResponseDTO> resultados = testPreguntaService.getResultadosTipoTest(test_id, tipoTest);
         return new ResponseEntity<>(resultados, HttpStatus.OK);
     }
 }
