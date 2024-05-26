@@ -55,4 +55,22 @@ public class UniversidadServiceTest {
 
         verify(universidadRepository, times(1)).findAll();
     }
+
+    @Test
+    void testGetAllUniversidades_NoUniversidadesFound() {
+        // Arrange
+        when(universidadRepository.findAll()).thenReturn(Collections.emptyList());
+        when(universidadMapper.toListDTO(anyList())).thenReturn(Collections.emptyList());
+
+        // Act
+        List<UniversidadResponseDTO> responseDTOList = universidadService.getAllUniversidades();
+
+        // Assert
+        assertNotNull(responseDTOList);
+        assertTrue(responseDTOList.isEmpty());
+
+        verify(universidadRepository, times(1)).findAll();
+        verify(universidadMapper, times(1)).toListDTO(anyList());
+    }
+
 }
