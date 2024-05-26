@@ -1,6 +1,5 @@
 package com.its.orientaTest.service;
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
-import com.its.orientaTest.exceptions.BadRequestException;
 import com.its.orientaTest.mapper.EstudianteMapper;
 import com.its.orientaTest.model.dto.EstudianteRequestDTO;
 import com.its.orientaTest.model.dto.EstudianteResponseDTO;
@@ -82,7 +81,7 @@ class EstudianteServiceTest {
         assertEquals(estudiante.getCorreoElectronico(), responseDTO.getCorreoElectronico());
         verify(estudianteRepository, times(1)).findByCorreoElectronico(anyString());
     }
-    
+
     @Test
     void testAutenticarEstudiante_NotFound() {
         when(estudianteRepository.findByCorreoElectronico(anyString())).thenReturn(Optional.empty());
@@ -90,4 +89,23 @@ class EstudianteServiceTest {
         assertThrows(ResourceNotFoundException.class, () -> estudianteService.autenticarEstudiante("juan.perez@example.com", "password"));
     }
 
+    @Test
+    void testActualizarEstudiante() {
+        when(estudianteRepository.findById(anyLong())).thenReturn(Optional.of(estudiante));
+        when(estudianteRepository.save(any(Estudiante.class))).thenReturn(estudiante);
+        when(estudianteMapper.toDTO(any(Estudiante.class))).thenReturn(estudianteResponseDTO);
+
+        EstudianteResponseDTO responseDTO = estudianteService.actualizarEstudiante(1L, estudianteRequestDTO);
+
+        assertEquals(estudianteRequestDTO.getNombre(), responseDTO.getNombre());
+        verify(estudianteRepository, times(1)).findById(anyLong());
+        verify(estudianteRepository, times(1)).save(any(Estudiante.class));
+    }
+
+    @Test
+    void testActualizarEstudiante_NotFound() {
+        when(estudianteRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> estudianteService.actualizarEstudiante(1L, estudianteRequestDTO));
+    }
 }
