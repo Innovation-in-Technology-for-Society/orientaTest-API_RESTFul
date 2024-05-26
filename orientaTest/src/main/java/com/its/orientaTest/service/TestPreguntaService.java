@@ -22,7 +22,7 @@ public class TestPreguntaService {
     private final TestPreguntaRepository testPreguntaRepository;
 
     @Transactional(readOnly = true)
-    public List<TestPreguntaResponseDTO> getResultadosAutoPercepcion(Long testId, String tipoTest) {
+    public List<TestPreguntaResponseDTO> getResultadosTipoTest(Long testId, String tipoTest) {
         List<TestPregunta> preguntas = testPreguntaRepository.findByTestIdAndTipoTest(testId, tipoTest);
         return preguntas.stream()
                 .map(this::mapToResponseDTO)
