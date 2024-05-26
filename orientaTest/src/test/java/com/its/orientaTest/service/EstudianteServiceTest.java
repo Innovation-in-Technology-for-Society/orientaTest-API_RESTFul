@@ -5,7 +5,7 @@ import com.its.orientaTest.model.dto.EstudianteRequestDTO;
 import com.its.orientaTest.model.dto.EstudianteResponseDTO;
 import com.its.orientaTest.model.entities.Estudiante;
 import com.its.orientaTest.repository.EstudianteRepository;
-
+import com.its.orientaTest.exceptions.BadRequestException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -87,6 +87,14 @@ class EstudianteServiceTest {
         when(estudianteRepository.findByCorreoElectronico(anyString())).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> estudianteService.autenticarEstudiante("juan.perez@example.com", "password"));
+    }
+
+    @Test
+    void testAutenticarEstudiante_IncorrectPassword() {
+        estudiante.setContrasenia("wrong_password");
+        when(estudianteRepository.findByCorreoElectronico(anyString())).thenReturn(Optional.of(estudiante));
+
+        assertThrows(BadRequestException.class, () -> estudianteService.autenticarEstudiante("juan.perez@example.com", "password"));
     }
 
     @Test
