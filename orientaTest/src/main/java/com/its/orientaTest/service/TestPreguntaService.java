@@ -33,7 +33,15 @@ public class TestPreguntaService {
         preguntas = preguntas.subList(0, Math.min(preguntas.size(), 25));
         savePreguntas(test_id,  preguntas, "vocacional");
     }
-    
+
+    @Transactional 
+    public void getPreguntasAutoPercepcion(Long test_id){
+        List<Pregunta> preguntas = preguntaRepository.findAutoPercepcion();
+        Collections.shuffle(preguntas);
+        preguntas = preguntas.subList(0, Math.min(preguntas.size(), 10));
+        savePreguntas(test_id,  preguntas, "auto-percepcion");
+    }
+
     @Transactional
     public void savePreguntas(Long test_id, List<Pregunta> preguntas, String tipo_test){
         for (Pregunta pregunta : preguntas){
