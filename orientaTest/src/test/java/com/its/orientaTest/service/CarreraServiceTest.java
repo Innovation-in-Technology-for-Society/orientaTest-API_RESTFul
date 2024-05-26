@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
 
-import com.its.orientaTest.exceptions.ResourceDuplicateException;
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.CarreraMapper;
-import com.its.orientaTest.model.dto.CarreraRequestDTO;
 import com.its.orientaTest.model.dto.CarreraResponseDTO;
 import com.its.orientaTest.model.entities.Carrera;
 import com.its.orientaTest.repository.CarreraRepository;
@@ -98,5 +96,15 @@ public class CarreraServiceTest {
         assertNotNull(result);
         assertEquals(carrera.getNombre(), result.getNombre());
         assertEquals(carrera.getDescripcion(), result.getDescripcion());
+    }
+
+    @Test
+    public void testGetCarreraByNombre_NonExistingNombre() {
+        // Arrange
+        String nombre = "Ingeniería de Software";
+        when(carreraRepository.findByNombre(nombre)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> carreraService.getCarreraByNombre(nombre));
     }
 }
