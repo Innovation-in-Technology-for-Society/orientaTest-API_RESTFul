@@ -71,4 +71,16 @@ class EstudianteServiceTest {
         assertEquals(1, responseDTOs.size());
         verify(estudianteRepository, times(1)).findAll();
     }
+
+    @Test
+    void testAutenticarEstudiante() {
+        when(estudianteRepository.findByCorreoElectronico(anyString())).thenReturn(Optional.of(estudiante));
+        when(estudianteMapper.toDTO(any(Estudiante.class))).thenReturn(estudianteResponseDTO);
+
+        EstudianteResponseDTO responseDTO = estudianteService.autenticarEstudiante("juan.perez@example.com", "password");
+
+        assertEquals(estudiante.getCorreoElectronico(), responseDTO.getCorreoElectronico());
+        verify(estudianteRepository, times(1)).findByCorreoElectronico(anyString());
+    }
+
 }
