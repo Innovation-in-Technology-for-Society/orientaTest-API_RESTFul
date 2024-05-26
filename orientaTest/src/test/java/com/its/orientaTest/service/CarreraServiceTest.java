@@ -78,4 +78,25 @@ public class CarreraServiceTest {
         verify(carreraRepository, times(1)).findAll();
         verify(carreraMapper, times(1)).toListDTO(anyList());
     }
+
+    @Test
+    public void testGetCarreraByNombre_ExistingNombre() {
+        // Arrange
+        String nombre = "Ingeniería de Sistemas";
+        Carrera carrera = new Carrera();
+        carrera.setId(1L);
+        carrera.setNombre(nombre);
+        when(carreraRepository.findByNombre(nombre)).thenReturn(Optional.of(carrera));
+
+        CarreraResponseDTO responseDTO = new CarreraResponseDTO(carrera.getNombre(), carrera.getDescripcion());
+        when(carreraMapper.toDTO(carrera)).thenReturn(responseDTO);
+
+        // Act
+        CarreraResponseDTO result = carreraService.getCarreraByNombre(nombre);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(carrera.getNombre(), result.getNombre());
+        assertEquals(carrera.getDescripcion(), result.getDescripcion());
+    }
 }
