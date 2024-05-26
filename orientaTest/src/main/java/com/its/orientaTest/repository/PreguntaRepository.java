@@ -11,4 +11,7 @@ public interface PreguntaRepository extends JpaRepository<Pregunta, Long>{
     @Query(value = "SELECT p FROM Pregunta p WHERE p.categoria.id IN (1, 2, 3)")
     List<Pregunta> findVocacional();
 
+    //Find AutoPercepcion By categoria 4-13
+    @Query(value = "SELECT p FROM Pregunta p WHERE p.categoria.id BETWEEN 4 AND 13")
+    List<Pregunta> findAutoPercepcion();
 }
