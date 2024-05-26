@@ -82,5 +82,12 @@ class EstudianteServiceTest {
         assertEquals(estudiante.getCorreoElectronico(), responseDTO.getCorreoElectronico());
         verify(estudianteRepository, times(1)).findByCorreoElectronico(anyString());
     }
+    
+    @Test
+    void testAutenticarEstudiante_NotFound() {
+        when(estudianteRepository.findByCorreoElectronico(anyString())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> estudianteService.autenticarEstudiante("juan.perez@example.com", "password"));
+    }
 
 }
