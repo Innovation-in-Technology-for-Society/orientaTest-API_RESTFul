@@ -45,4 +45,14 @@ public class UniversidadServiceTest {
         assertNotNull(result);
         assertEquals(nombre, result.getNombre());
     }
+
+    @Test
+    public void testGetUniversidadByNombre_NonExistingName(){
+        // Arrange
+        String nombre = "Universidad Tecnológica del Perú";
+        when (universidadRepository.findByNombre(nombre)).thenReturn(Optional.empty()); 
+        
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> universidadService.getUniversidadByNombre(nombre));
+    }
 }   
