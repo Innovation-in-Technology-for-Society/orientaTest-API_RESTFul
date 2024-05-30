@@ -33,7 +33,7 @@ public class TestPreguntaServiceTest {
     @Test
     public void testGetResultadosTipoTest_ReturnsEmptyList() {
         Long test_id = 1L;
-        String tipoTest = "auto-percepcion";
+        String tipoTest = "vocacional";
 
         when(testPreguntaRepository.findByTestIdAndTipoTest(test_id, tipoTest)).thenReturn(Collections.emptyList());
 
@@ -46,7 +46,7 @@ public class TestPreguntaServiceTest {
     @Test
     public void testGetResultadosTipoTest_ReturnsListOfDtos() {
         Long test_id = 1L;
-        String tipoTest = "auto-percepcion";
+        String tipoTest = "vocacional";
 
 
         Pregunta pregunta1 = new Pregunta();
