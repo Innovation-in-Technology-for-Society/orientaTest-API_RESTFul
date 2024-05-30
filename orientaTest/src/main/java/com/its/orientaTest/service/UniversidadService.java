@@ -20,7 +20,6 @@ public class UniversidadService {
     private final UniversidadRepository universidadRepository;
     private final UniversidadMapper universidadMapper;
 
-    
     @Transactional
     public UniversidadResponseDTO createUniversidad(UniversidadRequestDTO universidadRequestDTO){
         // Verificar si la Universidad existe

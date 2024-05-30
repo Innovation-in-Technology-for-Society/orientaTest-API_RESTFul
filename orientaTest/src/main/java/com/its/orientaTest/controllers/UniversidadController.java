@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UniversidadController {
     private final UniversidadService universidadService;
-    
+
     @PostMapping
     public ResponseEntity<UniversidadResponseDTO> createUniversidad(@Validated @RequestBody UniversidadRequestDTO universidadRequestDTO){
         UniversidadResponseDTO createdUniversidad = universidadService.createUniversidad(universidadRequestDTO);
