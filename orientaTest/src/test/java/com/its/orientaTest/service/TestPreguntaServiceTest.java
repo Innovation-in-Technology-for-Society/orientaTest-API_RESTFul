@@ -7,6 +7,7 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.model.entities.Carrera;
 import com.its.orientaTest.model.entities.CarreraUniversidad;
 import com.its.orientaTest.model.entities.Resultado;
@@ -20,6 +21,7 @@ import com.its.orientaTest.repository.TestRepository;
 import com.its.orientaTest.repository.UniversidadRepository;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -100,4 +102,20 @@ public class TestPreguntaServiceTest {
         verify(carreraUniversidadRepository, times(1)).findByUniversidadAndCarrera(1L, 1L);
         verify(resultadoRepository, times(1)).save(any(Resultado.class));
     }
+
+    @Test
+public void testCalculateResultado_ThrowsResourceNotFoundException() {
+    // Arrange
+    Long testId = 1L;
+
+    when(testRepository.findById(testId)).thenReturn(java.util.Optional.empty());
+
+    // Act & Assert
+    assertThrows(ResourceNotFoundException.class, () -> testPreguntaService.calculateResultado(testId));
+
+    // Verify
+    verify(testRepository, times(1)).findById(testId);
+    verifyNoMoreInteractions(testPreguntaRepository, universidadRepository, carreraRepository, carreraUniversidadRepository, resultadoRepository);
+}
+
 }
