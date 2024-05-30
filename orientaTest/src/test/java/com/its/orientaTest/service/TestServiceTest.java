@@ -1,5 +1,6 @@
 package com.its.orientaTest.service;
 
+import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.TestMapper;
 import com.its.orientaTest.model.dto.TestResponseDTO;
 import com.its.orientaTest.repository.TestRepository;
@@ -44,5 +45,14 @@ public class TestServiceTest {
 
         assertNotNull(result);
         assertEquals(testResponseDTO.getId(), result.getId());
+    }
+
+    @Test
+    public void testGetTestByEstudianteId_NonExistingId() {
+        Long estudiante_id = 1L;
+
+        when(testRepository.findByEstudianteId(estudiante_id)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> testService.getTestByEstudianteId(estudiante_id));
     }
 }
