@@ -13,7 +13,6 @@ import com.its.orientaTest.model.entities.TestPregunta;
 import com.its.orientaTest.repository.PreguntaRepository;
 import com.its.orientaTest.repository.TestPreguntaRepository;
 import com.its.orientaTest.repository.TestRepository;
-import com.its.orientaTest.service.TestPreguntaService;
 import com.its.orientaTest.mapper.TestPreguntaMapper;
 
 import org.junit.jupiter.api.BeforeEach;
