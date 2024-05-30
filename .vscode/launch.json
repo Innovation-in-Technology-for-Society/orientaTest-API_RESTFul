@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-OrientaTestApplication<orientaTest>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.its.orientaTest.OrientaTestApplication",
+            "projectName": "orientaTest",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
