@@ -29,7 +29,7 @@ public class UniversidadServiceTest {
     private UniversidadService universidadService;
 
     @Test
-    public void testGetUniversidadAll_ReturnsEmptyList() {
+    public void testGetUniversidadPrecisa_ReturnsEmptyList() {
         when(universidadRepository.findAll()).thenReturn(Collections.emptyList());
         when(universidadMapper.toListDTOPrecisa(Collections.emptyList())).thenReturn(Collections.emptyList());
 
@@ -40,7 +40,7 @@ public class UniversidadServiceTest {
     }
 
     @Test
-    public void testGetUniversidadAll_ReturnsListOfDtos() {
+    public void testGetUniversidadPrecisa_ReturnsListOfDtos() {
         Universidad universidad1 = new Universidad();
         universidad1.setId(1L);
         universidad1.setNombre("Universidad 1");
