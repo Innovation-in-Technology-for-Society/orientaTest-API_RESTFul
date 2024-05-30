@@ -158,7 +158,7 @@ public class TestPreguntaService {
     public List<TestPreguntaResponseDTO> getResultadosTipoTest(Long testId, String tipoTest) {
         List<TestPregunta> preguntas = testPreguntaRepository.findByTestIdAndTipoTest(testId, tipoTest);
         return preguntas.stream()
-                .map(this::mapToResponseDTO)
+                .map(testPreguntaMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
@@ -171,5 +171,4 @@ public class TestPreguntaService {
         dto.setPregunta_id(preguntaDTO);
         return dto;
     }
-
 }
