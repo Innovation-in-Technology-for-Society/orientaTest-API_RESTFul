@@ -18,11 +18,10 @@ import com.its.orientaTest.repository.ResultadoRepository;
 import com.its.orientaTest.repository.TestPreguntaRepository;
 import com.its.orientaTest.repository.TestRepository;
 import com.its.orientaTest.repository.UniversidadRepository;
-
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +54,13 @@ public class TestPreguntaService {
         preguntas = preguntas.subList(0, Math.min(preguntas.size(), 10));
         savePreguntas(test_id,  preguntas, "auto-percepcion");
     }
-
+    @Transactional(readOnly = true)
+    public List<TestPreguntaResponseDTO> getResultadosTipoTest(Long testId, String tipoTest) {
+        List<TestPregunta> preguntas = testPreguntaRepository.findByTestIdAndTipoTest(testId, tipoTest);
+        return preguntas.stream()
+                .map(testPreguntaMapper::toResponseDTO)
+                .collect(Collectors.toList());
+    }
     @Transactional
     public void savePreguntas(Long test_id, List<Pregunta> preguntas, String tipo_test){
         for (Pregunta pregunta : preguntas){
@@ -146,6 +151,7 @@ public class TestPreguntaService {
             .max(Map.Entry.comparingByValue())
             .map(Map.Entry::getKey)
             .orElse(null);
+
     }
   
     @Transactional(readOnly = true)
@@ -165,4 +171,5 @@ public class TestPreguntaService {
         dto.setPregunta_id(preguntaDTO);
         return dto;
     }
+
 }
