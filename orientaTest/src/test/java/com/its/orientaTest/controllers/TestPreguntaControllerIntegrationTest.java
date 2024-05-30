@@ -1,24 +1,23 @@
-package com.its.orientaTest.controller;
+package com.its.orientaTest.controllers;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UniversidadControllerIntegrationTest {
+public class TestPreguntaControllerIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void TestGetEconomicBenefitUniversidad() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/universidades/beneficio-socioeconomico")
-                        .accept(MediaType.APPLICATION_JSON))
+    public void testGetResultadosTipoTest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/test-preguntas/{test_id}/{tipoTest}", 1L, "auto-percepcion"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-    }    
+    }
 }
