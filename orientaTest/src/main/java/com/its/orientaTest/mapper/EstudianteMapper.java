@@ -25,4 +25,11 @@ public class EstudianteMapper {
     public List<EstudianteResponseDTO> toListDTO(List<Estudiante> estudiantes){
         return estudiantes.stream().map(this::toDTO).toList();
     }
+
+    public void updateEntity(Estudiante estudiante, EstudianteRequestDTO estudianteRequestDTO) {
+        estudiante.setNombre(estudianteRequestDTO.getNombre());
+        estudiante.setApellido(estudianteRequestDTO.getApellido());
+        estudiante.setCorreoElectronico(estudianteRequestDTO.getCorreoElectronico());
+        estudiante.setContrasenia(estudianteRequestDTO.getContrasenia());
+    }
 }
