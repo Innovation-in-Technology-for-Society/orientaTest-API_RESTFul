@@ -1,24 +1,29 @@
 package com.its.orientaTest.service;
 
+import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.UniversidadMapper;
 import com.its.orientaTest.model.dto.UniversidadResponseDTO;
 import com.its.orientaTest.model.entities.Universidad;
 import com.its.orientaTest.repository.UniversidadRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
+import java.util.Optional;
 import java.util.Collections;
 import java.util.List;
 
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+@ExtendWith(MockitoExtension.class)
 public class UniversidadServiceTest {
     @Mock
     private UniversidadRepository universidadRepository;
-
+  
     @Mock
     private UniversidadMapper universidadMapper;
 
@@ -66,4 +71,33 @@ public class UniversidadServiceTest {
         verify(universidadMapper, times(1)).toListDTO(anyList());
     }
 
+@Test
+    public void testGetUniversidadByNombre_ExistingName(){
+        // Arrange
+        String nombre = "Universidad Peruana de Ciencias Aplicadas";
+        Universidad universidad = new Universidad();
+        when (universidadRepository.findByNombre(nombre)).thenReturn(Optional.of(universidad));
+        
+        //Mocking mapper
+        UniversidadResponseDTO responseDTO = new UniversidadResponseDTO();
+        responseDTO.setNombre(nombre);
+        when(universidadMapper.toDTO(universidad)).thenReturn(responseDTO);
+
+        // Act
+        UniversidadResponseDTO result = universidadService.getUniversidadByNombre(nombre);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(nombre, result.getNombre());
+    }
+
+    @Test
+    public void testGetUniversidadByNombre_NonExistingName(){
+        // Arrange
+        String nombre = "Universidad Tecnológica del Perú";
+        when (universidadRepository.findByNombre(nombre)).thenReturn(Optional.empty()); 
+        
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> universidadService.getUniversidadByNombre(nombre));
+    }
 }

@@ -71,4 +71,9 @@ public class UniversidadControllerIntegrationTest {
                         .content(universidad3Json))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
+  
+    @Test
+    public void testGetUniversidadByNombre() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/universidades/{nombre}", "Universidad Peruana Cayetano Heredia"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
 }
