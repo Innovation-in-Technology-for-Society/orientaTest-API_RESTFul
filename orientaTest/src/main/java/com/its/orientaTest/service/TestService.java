@@ -51,4 +51,14 @@ public class TestService {
         List<Test> tests = testRepository.findAll();
         return testMapper.toListDTO(tests);
     }
+
+    @Transactional
+    public TestResponseDTO generateResultado(Long test_id){
+        testPreguntaService.calculateResultado(test_id);
+
+        Test test = testRepository.findById(test_id)
+        .orElseThrow(() -> new ResourceNotFoundException("Test no encontrado con id " + test_id));
+
+        return testMapper.toDTO(test);
+    }
 }

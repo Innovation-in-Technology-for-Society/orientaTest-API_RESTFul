@@ -28,5 +28,10 @@ public class TestController {
     public ResponseEntity<List<TestResponseDTO>> getAllTests(){
         List<TestResponseDTO> tests = testService.getAllTests();
         return new ResponseEntity<>(tests, HttpStatus.OK);
+
+    @PostMapping("{test_id}/resultado")
+    public ResponseEntity<TestResponseDTO> generateResultado(@PathVariable Long test_id){
+        TestResponseDTO finishedTest = testService.generateResultado(test_id);
+        return new ResponseEntity<>(finishedTest, HttpStatus.CREATED);
     }
 }
