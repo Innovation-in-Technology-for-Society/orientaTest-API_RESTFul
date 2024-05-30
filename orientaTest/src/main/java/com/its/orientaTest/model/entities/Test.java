@@ -17,9 +17,6 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "tipo_test", nullable = false)
-    private String tipoTest;
-
     @Column(name = "fecha_test", nullable = false)
     private LocalDateTime fechaTest;
 
