@@ -61,4 +61,38 @@ public class PagoServiceTest {
         assertNotNull(result);
         assertTrue(result.isEmpty());
     }
+
+    @Test
+    public void testGetPagosBeneficioByEstudianteId_ReturnsListOfDtos() {
+        Long idEstudiante = 1L;
+
+        when(estudianteRepository.existsById(idEstudiante)).thenReturn(true);
+
+        Pago pago1 = new Pago();
+        pago1.setId(1L);
+        // Set other fields for pago1 as necessary
+
+        Pago pago2 = new Pago();
+        pago2.setId(2L);
+        // Set other fields for pago2 as necessary
+
+        List<Pago> pagos = Arrays.asList(pago1, pago2);
+
+        when(pagoRepository.findByIdEstudiante(idEstudiante)).thenReturn(pagos);
+
+        PagoBeneficioResponseDTO dto1 = new PagoBeneficioResponseDTO();
+        // Set fields for dto1 as necessary
+
+        PagoBeneficioResponseDTO dto2 = new PagoBeneficioResponseDTO();
+        // Set fields for dto2 as necessary
+
+        when(pagoMapper.toListBeneficioDTO(pagos)).thenReturn(Arrays.asList(dto1, dto2));
+
+        List<PagoBeneficioResponseDTO> result = pagoService.getPagosBeneficioByEstudianteId(idEstudiante);
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals(dto1, result.get(0));
+        assertEquals(dto2, result.get(1));
+    }
 }
