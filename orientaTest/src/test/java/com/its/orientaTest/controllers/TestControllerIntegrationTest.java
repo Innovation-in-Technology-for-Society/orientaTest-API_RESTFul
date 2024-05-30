@@ -1,4 +1,4 @@
-package com.its.orientaTest.controller;
+package com.its.orientaTest.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.its.orientaTest.model.dto.TestRequestDTO;
