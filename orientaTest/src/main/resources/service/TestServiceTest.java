@@ -1,5 +1,3 @@
-package com.its.orientaTest.service;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -110,5 +108,14 @@ public class TestServiceTest {
         assertEquals(2, result.size());
         verify(testRepository, times(1)).findAll();
         verify(testMapper, times(1)).toListDTO(tests);
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testGetAllTests_NoTestsFound() {
+        // Arrange
+        when(testRepository.findAll()).thenReturn(new ArrayList<>());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> testService.getAllTests());
     }
 }
