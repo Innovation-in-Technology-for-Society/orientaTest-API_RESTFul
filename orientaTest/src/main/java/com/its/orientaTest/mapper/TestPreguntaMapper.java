@@ -1,6 +1,5 @@
 package com.its.orientaTest.mapper;
 
-import com.its.orientaTest.model.dto.PreguntaResponseDTO;
 import com.its.orientaTest.model.dto.TestPreguntaRequestDTO;
 import com.its.orientaTest.model.dto.TestPreguntaResponseDTO;
 import com.its.orientaTest.model.entities.TestPregunta;
