@@ -33,5 +33,5 @@ public class TestPreguntaMapper {
             dto.setPregunta_id(modelMapper.map(testPregunta.getPregunta(), PreguntaResponseDTO.class));
         }
         return dto;
-    }    
+    }
 }
