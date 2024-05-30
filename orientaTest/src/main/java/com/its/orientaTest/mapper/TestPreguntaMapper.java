@@ -1,6 +1,5 @@
 package com.its.orientaTest.mapper;
 
-import com.its.orientaTest.model.dto.PreguntaResponseDTO;
 import com.its.orientaTest.model.dto.TestPreguntaRequestDTO;
 import com.its.orientaTest.model.dto.TestPreguntaResponseDTO;
 import com.its.orientaTest.model.entities.TestPregunta;
@@ -25,13 +24,5 @@ public class TestPreguntaMapper {
 
     public List<TestPreguntaResponseDTO> toListDTO(List<TestPregunta> testPreguntas){
         return testPreguntas.stream().map(this::toDTO).toList();
-    }
-
-    public TestPreguntaResponseDTO toResponseDTO(TestPregunta testPregunta) {
-        TestPreguntaResponseDTO dto = modelMapper.map(testPregunta, TestPreguntaResponseDTO.class);
-        if (testPregunta.getPregunta() != null) {
-            dto.setPregunta_id(modelMapper.map(testPregunta.getPregunta(), PreguntaResponseDTO.class));
-        }
-        return dto;
     }
 }
