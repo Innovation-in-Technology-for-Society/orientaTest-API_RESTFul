@@ -24,4 +24,3 @@ public class TestPreguntaController {
         return new ResponseEntity<>(resultados, HttpStatus.OK);
     }
 }
-
