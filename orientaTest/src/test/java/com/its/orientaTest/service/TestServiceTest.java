@@ -1,4 +1,10 @@
 package com.its.orientaTest.service;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -21,9 +27,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+@ExtendWith(MockitoExtension.class)
 @SpringBootTest
 public class TestServiceTest {
-
     @Mock
     private TestRepository testRepository;
 
@@ -118,5 +124,35 @@ public class TestServiceTest {
 
         // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> testService.getAllTests());
+    }
+  
+    @Test
+    public void testGetTestByEstudianteId_ReturnsTestResponseDTO() {
+        Long estudiante_id = 1L;
+
+        com.its.orientaTest.model.entities.Test test = new com.its.orientaTest.model.entities.Test();
+        test.setId(1L);
+        // Configurar otros campos de test según sea necesario
+
+        TestResponseDTO testResponseDTO = new TestResponseDTO();
+        testResponseDTO.setId(1L);
+        // Configurar otros campos de testResponseDTO según sea necesario
+
+        when(testRepository.findByEstudianteId(estudiante_id)).thenReturn(Optional.of(test));
+        when(testMapper.toDTO(test)).thenReturn(testResponseDTO);
+
+        TestResponseDTO result = testService.getTestByEstudianteId(estudiante_id);
+
+        assertNotNull(result);
+        assertEquals(testResponseDTO.getId(), result.getId());
+    }
+  
+    @Test
+    public void testGetTestByEstudianteId_NonExistingId() {
+        Long estudiante_id = 1L;
+
+        when(testRepository.findByEstudianteId(estudiante_id)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> testService.getTestByEstudianteId(estudiante_id));
     }
 }

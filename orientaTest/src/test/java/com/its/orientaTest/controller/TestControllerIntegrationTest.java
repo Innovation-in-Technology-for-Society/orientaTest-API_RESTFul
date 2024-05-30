@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.its.orientaTest.model.dto.TestRequestDTO;
 import com.its.orientaTest.model.dto.TestResponseDTO;
 import com.its.orientaTest.service.TestService;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TestControllerIntegrationTest {
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -81,6 +79,11 @@ public class TestControllerIntegrationTest {
             return new ObjectMapper().writeValueAsString(obj);
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
+    }
+      
+    @Test
+    public void testGetTestByEstudianteIdTest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/tests/{estudiante_id}", 1L))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
