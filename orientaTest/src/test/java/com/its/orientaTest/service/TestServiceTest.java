@@ -60,4 +60,15 @@ public class TestServiceTest {
         verify(testRepository, times(1)).findById(testId);
         verify(testMapper, times(1)).toDTO(test);
     }
+
+    @org.junit.jupiter.api.Test
+    public void testGenerateResultado_ThrowsResourceNotFoundException() {
+        // Arrange
+        Long testId = 1L;
+
+        when(testRepository.findById(testId)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> testService.generateResultado(testId));
+    }
 }
