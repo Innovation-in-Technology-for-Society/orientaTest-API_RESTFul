@@ -55,6 +55,26 @@ public class TestControllerIntegrationTest {
                 .andExpect(jsonPath("$.estudiante_id").value(1L));
     }
 
+    @Test
+    public void testGetAllTests() throws Exception {
+        TestResponseDTO responseDTO = new TestResponseDTO();
+        responseDTO.setId(1L);
+        responseDTO.setTipo_test("vocacional");
+        responseDTO.setFecha_test(LocalDateTime.of(2024, 5, 29, 12, 0, 0));
+        responseDTO.setEstudiante_id(1L);
+
+        List<TestResponseDTO> responseDTOList = Collections.singletonList(responseDTO);
+
+        when(testService.getAllTests()).thenReturn(responseDTOList);
+
+        mockMvc.perform(get("/tests")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(1L))
+                .andExpect(jsonPath("$[0].tipo_test").value("vocacional"))
+                .andExpect(jsonPath("$[0].fecha_test").value("2024-05-29T12:00:00"))
+                .andExpect(jsonPath("$[0].estudiante_id").value(1L));
+    }
 
     private String asJsonString(final Object obj) {
         try {
