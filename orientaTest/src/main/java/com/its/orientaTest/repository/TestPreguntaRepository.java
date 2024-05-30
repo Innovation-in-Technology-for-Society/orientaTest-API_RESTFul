@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface TestPreguntaRepository extends JpaRepository<TestPregunta, Long>{
     List<TestPregunta> findByTestId(Long test_id);
+    List<TestPregunta> findByTestIdAndTipoTest(Long test_id, String tipoTest);
 }

@@ -146,4 +146,23 @@ public class TestPreguntaService {
             .max(Map.Entry.comparingByValue())
             .map(Map.Entry::getKey)
             .orElse(null);
+    }
+  
+    @Transactional(readOnly = true)
+    public List<TestPreguntaResponseDTO> getResultadosTipoTest(Long testId, String tipoTest) {
+        List<TestPregunta> preguntas = testPreguntaRepository.findByTestIdAndTipoTest(testId, tipoTest);
+        return preguntas.stream()
+                .map(this::mapToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    private TestPreguntaResponseDTO mapToResponseDTO(TestPregunta testPregunta) {
+        TestPreguntaResponseDTO dto = testPreguntaMapper.toDTO(testPregunta);
+        Pregunta pregunta = testPregunta.getPregunta();
+        PreguntaResponseDTO preguntaDTO = new PreguntaResponseDTO();
+        preguntaDTO.setId(pregunta.getId());
+        preguntaDTO.setEnunciado(pregunta.getEnunciado());
+        dto.setPregunta_id(preguntaDTO);
+        return dto;
+    }
 }

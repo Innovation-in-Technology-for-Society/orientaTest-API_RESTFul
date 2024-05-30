@@ -1,5 +1,6 @@
 package com.its.orientaTest.service;
 
+import com.its.orientaTest.model.dto.UniversidadPrecisaResponseDTO;
 import com.its.orientaTest.exceptions.ResourceDuplicateException;
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.UniversidadMapper;
@@ -62,5 +63,11 @@ public class UniversidadService {
     @Transactional
     public void deleteUniversidad(Long id){
         universidadRepository.deleteById(id);
+    }
+    
+    @Transactional(readOnly = true)
+    public List<UniversidadPrecisaResponseDTO> getUniversidadPrecisa(){
+        List<Universidad> universidad = universidadRepository.findAll();
+        return universidadMapper.toListDTOPrecisa((universidad));
     }
 }

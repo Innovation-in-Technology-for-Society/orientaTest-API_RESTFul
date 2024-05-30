@@ -8,7 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TestPreguntaRequestDTO {
-    private Long test_id;
-    private Long pregunta_id;
     private Integer valor;
 }
