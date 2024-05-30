@@ -45,5 +45,20 @@ public class PagoServiceTest {
         });
 
         assertEquals("Estudiante no encontrado", exception.getMessage());
-    }    
+    }
+
+    @Test
+    public void testGetPagosBeneficioByEstudianteId_ReturnsEmptyList() {
+        Long idEstudiante = 1L;
+
+        when(estudianteRepository.existsById(idEstudiante)).thenReturn(true);
+        when(pagoRepository.findByIdEstudiante(idEstudiante)).thenReturn(Collections.emptyList());
+
+        when(pagoMapper.toListBeneficioDTO(Collections.emptyList())).thenReturn(Collections.emptyList());
+
+        List<PagoBeneficioResponseDTO> result = pagoService.getPagosBeneficioByEstudianteId(idEstudiante);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
 }
