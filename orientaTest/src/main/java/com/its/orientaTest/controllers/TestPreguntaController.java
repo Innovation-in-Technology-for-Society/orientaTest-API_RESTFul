@@ -1,4 +1,4 @@
-package com.its.orientaTest.controller;
+package com.its.orientaTest.controllers;
 
 import com.its.orientaTest.model.dto.TestPreguntaResponseDTO;
 import com.its.orientaTest.service.TestPreguntaService;

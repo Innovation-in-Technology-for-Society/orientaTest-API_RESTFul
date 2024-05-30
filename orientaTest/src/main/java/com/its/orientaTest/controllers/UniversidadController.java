@@ -1,4 +1,4 @@
-package com.its.orientaTest.controller;
+package com.its.orientaTest.controllers;
 
 import java.util.List;
 
