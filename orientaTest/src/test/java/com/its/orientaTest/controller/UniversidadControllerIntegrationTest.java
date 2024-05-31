@@ -1,4 +1,4 @@
-package com.its.orientaTest.controllers;
+package com.its.orientaTest.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +11,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TestControllerIntegrationTest {
-
+public class UniversidadControllerIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-   public void testGenerateResultado() throws Exception {
-        // Simular una solicitud de creación de resultado de prueba con un ID de prueba
-        mockMvc.perform(MockMvcRequestBuilders.post("/tests/1/resultado")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
-     }
-  
-   public void testGetTestByEstudianteIdTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/tests/{estudiante_id}", 1L))
+    public void TestGetEconomicBenefitUniversidad() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/universidades/beneficio-socioeconomico")
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-    }
+    }    
 }
