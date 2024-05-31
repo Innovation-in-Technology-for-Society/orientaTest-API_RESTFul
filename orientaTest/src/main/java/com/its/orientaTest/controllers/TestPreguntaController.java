@@ -26,7 +26,7 @@ public class TestPreguntaController {
     }
 }
 
-  @GetMapping("/{test_id}/{tipoTest}")
+    @GetMapping("/{test_id}/{tipoTest}")
     public ResponseEntity<List<TestPreguntaResponseDTO>> getResultadosTipoTest(
             @PathVariable("test_id") Long test_id,
             @PathVariable("tipoTest") String tipoTest) {
