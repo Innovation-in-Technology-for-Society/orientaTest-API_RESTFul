@@ -1,4 +1,6 @@
 package com.its.orientaTest.service;
+
+import com.its.orientaTest.model.entities.Test;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -22,9 +24,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 public class TestServiceTest {
+
     @Mock
     private TestRepository testRepository;
 
@@ -32,9 +36,11 @@ public class TestServiceTest {
     private TestMapper testMapper;
 
     @Mock
+
     private EstudianteRepository estudianteRepository;
 
     @Mock
+
     private TestPreguntaService testPreguntaService;
 
     @InjectMocks
@@ -90,6 +96,38 @@ public class TestServiceTest {
 
         // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> testService.startTest(requestDTO));
+    }
+    
+    public void testGenerateResultado() {
+        // Arrange
+        Long testId = 1L;
+        Test test = new Test();
+        test.setId(testId);
+        test.setEstudiante(new Estudiante());
+        test.setFechaTest(LocalDateTime.now());
+
+        when(testRepository.findById(testId)).thenReturn(Optional.of(test));
+        when(testMapper.toDTO(test)).thenReturn(new TestResponseDTO());
+
+        // Act
+        TestResponseDTO result = testService.generateResultado(testId);
+
+        // Assert
+        assertNotNull(result);
+        verify(testPreguntaService, times(1)).calculateResultado(testId);
+        verify(testRepository, times(1)).findById(testId);
+        verify(testMapper, times(1)).toDTO(test);
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testGenerateResultado_ThrowsResourceNotFoundException() {
+        // Arrange
+        Long testId = 1L;
+
+        when(testRepository.findById(testId)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(ResourceNotFoundException.class, () -> testService.generateResultado(testId));
     }
 
     @org.junit.jupiter.api.Test
