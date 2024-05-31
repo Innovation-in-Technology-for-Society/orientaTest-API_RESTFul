@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TestResponseDTO {
     private Long id;
-    private String tipo_test;
     private LocalDateTime fecha_test;
     private Long estudiante_id;
 }

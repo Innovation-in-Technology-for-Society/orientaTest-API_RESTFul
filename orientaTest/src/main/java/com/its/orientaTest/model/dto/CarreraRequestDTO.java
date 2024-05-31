@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class CarreraRequestDTO {
     private String nombre;  
     private String descripcion;
+    private String inversion;
 }

@@ -19,6 +19,9 @@ public class TestPregunta {
     @JoinColumn(name = "test_id", nullable = false)
     private Test test;
 
+    @Column(name = "tipo_test", nullable = false)
+    private String tipoTest;
+
     @ManyToOne
     @JoinColumn(name = "pregunta_id", nullable = false)
     private Pregunta pregunta;
