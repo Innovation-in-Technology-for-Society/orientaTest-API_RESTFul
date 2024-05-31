@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TestPreguntaResponseDTO {
     private Long test_id;
-    private Long pregunta_id;
+    private String tipo_test;
+    private PreguntaResponseDTO pregunta_id;
     private Integer valor;
 }
