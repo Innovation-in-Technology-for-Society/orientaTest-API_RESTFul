@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UniversidadRequestDTO {
+public class UniversidadPrecisaResponseDTO {  
+    private Long id;
     private String nombre;
     private String correoElectronico;
     private String telefono;
