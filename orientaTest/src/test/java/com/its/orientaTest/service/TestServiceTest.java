@@ -1,18 +1,14 @@
 package com.its.orientaTest.service;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.TestMapper;
 import com.its.orientaTest.model.dto.TestRequestDTO;
@@ -20,7 +16,6 @@ import com.its.orientaTest.model.dto.TestResponseDTO;
 import com.its.orientaTest.model.entities.Estudiante;
 import com.its.orientaTest.repository.EstudianteRepository;
 import com.its.orientaTest.repository.TestRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -133,11 +128,9 @@ public class TestServiceTest {
         com.its.orientaTest.model.entities.Test test = new com.its.orientaTest.model.entities.Test();
         test.setId(1L);
         // Configurar otros campos de test según sea necesario
-
         TestResponseDTO testResponseDTO = new TestResponseDTO();
         testResponseDTO.setId(1L);
         // Configurar otros campos de testResponseDTO según sea necesario
-
         when(testRepository.findByEstudianteId(estudiante_id)).thenReturn(Optional.of(test));
         when(testMapper.toDTO(test)).thenReturn(testResponseDTO);
 
@@ -146,13 +139,13 @@ public class TestServiceTest {
         assertNotNull(result);
         assertEquals(testResponseDTO.getId(), result.getId());
     }
-  
+
     @Test
     public void testGetTestByEstudianteId_NonExistingId() {
         Long estudiante_id = 1L;
-
         when(testRepository.findByEstudianteId(estudiante_id)).thenReturn(Optional.empty());
-
         assertThrows(ResourceNotFoundException.class, () -> testService.getTestByEstudianteId(estudiante_id));
     }
+
 }
+

@@ -1,5 +1,4 @@
 package com.its.orientaTest.service;
-
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.TestMapper;
 import com.its.orientaTest.model.dto.TestRequestDTO;
@@ -8,11 +7,9 @@ import com.its.orientaTest.model.entities.Estudiante;
 import com.its.orientaTest.model.entities.Test;
 import com.its.orientaTest.repository.EstudianteRepository;
 import com.its.orientaTest.repository.TestRepository;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TestService {
     private final TestRepository testRepository;
+    private final TestMapper testMapper;
     private final TestMapper testMapper; 
     private final EstudianteRepository estudianteRepository;
     private final TestPreguntaService testPreguntaService;
