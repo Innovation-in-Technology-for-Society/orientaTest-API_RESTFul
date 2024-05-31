@@ -1,4 +1,4 @@
-package com.its.orientaTest.controller;
+package com.its.orientaTest.controllers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
