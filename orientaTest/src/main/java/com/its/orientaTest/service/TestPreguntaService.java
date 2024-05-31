@@ -1,5 +1,6 @@
 package com.its.orientaTest.service;
 
+import java.util.stream.Collectors;
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.TestPreguntaMapper;
 import com.its.orientaTest.model.dto.TestPreguntaRequestDTO;
@@ -18,7 +19,6 @@ import com.its.orientaTest.repository.ResultadoRepository;
 import com.its.orientaTest.repository.TestPreguntaRepository;
 import com.its.orientaTest.repository.TestRepository;
 import com.its.orientaTest.repository.UniversidadRepository;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
@@ -147,7 +147,7 @@ public class TestPreguntaService {
             .map(Map.Entry::getKey)
             .orElse(null);
     }
-  
+
     @Transactional(readOnly = true)
     public List<TestPreguntaResponseDTO> getResultadosTipoTest(Long testId, String tipoTest) {
         List<TestPregunta> preguntas = testPreguntaRepository.findByTestIdAndTipoTest(testId, tipoTest);
@@ -155,7 +155,7 @@ public class TestPreguntaService {
                 .map(testPreguntaMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
-
+  
     private TestPreguntaResponseDTO mapToResponseDTO(TestPregunta testPregunta) {
         TestPreguntaResponseDTO dto = testPreguntaMapper.toDTO(testPregunta);
         Pregunta pregunta = testPregunta.getPregunta();
