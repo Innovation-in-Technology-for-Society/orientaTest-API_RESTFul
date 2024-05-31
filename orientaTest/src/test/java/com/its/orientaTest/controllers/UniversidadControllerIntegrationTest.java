@@ -1,5 +1,4 @@
 package com.its.orientaTest.controllers;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.its.orientaTest.model.dto.UniversidadRequestDTO;
 import org.junit.jupiter.api.Test;
@@ -73,7 +72,14 @@ public class UniversidadControllerIntegrationTest {
     }
   
     @Test
+    public void TestGetEconomicBenefitUniversidad() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/universidades/beneficio-socioeconomico")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }   
+    @Test
     public void testGetUniversidadByNombre() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders.get("/universidades/{nombre}", "Universidad Peruana Cayetano Heredia"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }

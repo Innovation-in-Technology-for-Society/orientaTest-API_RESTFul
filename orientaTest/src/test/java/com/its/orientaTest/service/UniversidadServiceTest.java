@@ -11,14 +11,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-
 import java.util.Optional;
 import java.util.Collections;
 import java.util.List;
@@ -40,20 +37,16 @@ public class UniversidadServiceTest {
     void testGetAllUniversidades() {
         when(universidadRepository.findAll()).thenReturn(Collections.singletonList(universidad));
         when(universidadMapper.toListDTO(anyList())).thenReturn(Collections.singletonList(universidadResponseDTO));
-
         List<UniversidadResponseDTO> responseDTOList = universidadService.getAllUniversidades();
-
         assertNotNull(responseDTOList);
         assertFalse(responseDTOList.isEmpty());
         assertEquals(1, responseDTOList.size());
-
         UniversidadResponseDTO responseDTO = responseDTOList.get(0);
         assertEquals("Universidad XYZ", responseDTO.getNombre());
         assertEquals("xyz@example.com", responseDTO.getCorreoElectronico());
         assertEquals("123456789", responseDTO.getTelefono());
         assertEquals("Ubicación XYZ", responseDTO.getUbicacion());
         assertEquals(5, responseDTO.getRanking());
-
         verify(universidadRepository, times(1)).findAll();
     }
 
@@ -62,14 +55,11 @@ public class UniversidadServiceTest {
         // Arrange
         when(universidadRepository.findAll()).thenReturn(Collections.emptyList());
         when(universidadMapper.toListDTO(anyList())).thenReturn(Collections.emptyList());
-
         // Act
         List<UniversidadResponseDTO> responseDTOList = universidadService.getAllUniversidades();
-
         // Assert
         assertNotNull(responseDTOList);
         assertTrue(responseDTOList.isEmpty());
-
         verify(universidadRepository, times(1)).findAll();
         verify(universidadMapper, times(1)).toListDTO(anyList());
     }
@@ -80,15 +70,12 @@ public class UniversidadServiceTest {
         String nombre = "Universidad Peruana de Ciencias Aplicadas";
         Universidad universidad = new Universidad();
         when (universidadRepository.findByNombre(nombre)).thenReturn(Optional.of(universidad));
-        
         //Mocking mapper
         UniversidadResponseDTO responseDTO = new UniversidadResponseDTO();
         responseDTO.setNombre(nombre);
         when(universidadMapper.toDTO(universidad)).thenReturn(responseDTO);
-
         // Act
         UniversidadResponseDTO result = universidadService.getUniversidadByNombre(nombre);
-
         // Assert
         assertNotNull(result);
         assertEquals(nombre, result.getNombre());
@@ -99,7 +86,6 @@ public class UniversidadServiceTest {
         // Arrange
         String nombre = "Universidad Tecnológica del Perú";
         when (universidadRepository.findByNombre(nombre)).thenReturn(Optional.empty()); 
-        
         // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> universidadService.getUniversidadByNombre(nombre));
     }
@@ -146,4 +132,5 @@ public class UniversidadServiceTest {
         assertEquals(dto1, result.get(0));
         assertEquals(dto2, result.get(1));
     }
+
 }

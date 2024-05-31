@@ -1,4 +1,5 @@
 package com.its.orientaTest.service;
+import com.its.orientaTest.model.dto.PreguntaResponseDTO;
 import java.util.stream.Collectors;
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.TestPreguntaMapper;
@@ -145,6 +146,7 @@ public class TestPreguntaService {
             .map(Map.Entry::getKey)
             .orElse(null);
     }
+  
     @Transactional(readOnly = true)
     public List<TestPreguntaResponseDTO> getResultadosTipoTest(Long testId, String tipoTest) {
         List<TestPregunta> preguntas = testPreguntaRepository.findByTestIdAndTipoTest(testId, tipoTest);

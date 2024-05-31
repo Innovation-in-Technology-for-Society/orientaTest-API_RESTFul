@@ -1,15 +1,16 @@
 package com.its.orientaTest.controllers;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.its.orientaTest.model.dto.UniversidadRequestDTO;
 import com.its.orientaTest.model.dto.UniversidadResponseDTO;
 import com.its.orientaTest.service.UniversidadService;
-
+import com.its.orientaTest.model.dto.UniversidadPrecisaResponseDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -17,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 public class UniversidadController {
     private final UniversidadService universidadService;
-
     @PostMapping
     public ResponseEntity<UniversidadResponseDTO> createUniversidad(@Validated @RequestBody UniversidadRequestDTO universidadRequestDTO){
         UniversidadResponseDTO createdUniversidad = universidadService.createUniversidad(universidadRequestDTO);
@@ -48,4 +48,12 @@ public class UniversidadController {
         universidadService.deleteUniversidad(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+  
+   @GetMapping("/beneficio-socioeconomico")
+    public ResponseEntity<List<UniversidadPrecisaResponseDTO>> getEconomicBenefitUniversidad(){
+        List<UniversidadPrecisaResponseDTO> universidad = universidadService.getUniversidadPrecisa();
+        return new ResponseEntity<>(universidad, HttpStatus.OK);
+    }
 }
+
+
