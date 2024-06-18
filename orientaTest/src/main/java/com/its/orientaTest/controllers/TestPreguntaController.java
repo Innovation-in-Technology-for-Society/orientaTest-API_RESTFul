@@ -24,7 +24,7 @@ public class TestPreguntaController {
         TestPreguntaResponseDTO answeredPregunta = testPreguntaService.answerPregunta(test_id, id, testPreguntaRequestDTO);
         return new ResponseEntity<>(answeredPregunta, HttpStatus.CREATED); 
     }
-}
+
 
     @GetMapping("/{test_id}/{tipoTest}")
     public ResponseEntity<List<TestPreguntaResponseDTO>> getResultadosTipoTest(

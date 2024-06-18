@@ -16,11 +16,11 @@ public class TestPreguntaControllerIntegrationTest {
 
     @Test
     public void testGetResultadosTipoTestAutopercepcion() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/test-preguntas/{test_id}/{tipoTest}", 1L, "auto-percepcion")).andExpect(MockMvcResultMatchers.status().isOk())
+        mockMvc.perform(MockMvcRequestBuilders.get("/test-preguntas/{test_id}/{tipoTest}", 1L, "auto-percepcion")).andExpect(MockMvcResultMatchers.status().isOk());
     }
   
     @Test
     public void testGetResultadosTipoTestVocacional() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/test-preguntas/{test_id}/{tipoTest}", 1L, "vocacional")).andExpect(MockMvcResultMatchers.status().isOk())
+        mockMvc.perform(MockMvcRequestBuilders.get("/test-preguntas/{test_id}/{tipoTest}", 1L, "vocacional")).andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

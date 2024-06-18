@@ -18,7 +18,6 @@ import java.util.List;
 public class TestService {
     private final TestRepository testRepository;
     private final TestMapper testMapper;
-    private final TestMapper testMapper; 
     private final EstudianteRepository estudianteRepository;
     private final TestPreguntaService testPreguntaService;
 

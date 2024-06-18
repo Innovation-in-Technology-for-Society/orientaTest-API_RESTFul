@@ -24,12 +24,10 @@ import java.util.List;
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.model.dto.TestPreguntaRequestDTO;
 import com.its.orientaTest.model.dto.TestPreguntaResponseDTO;
-import com.its.orientaTest.model.entities.Pregunta;
 import com.its.orientaTest.model.entities.TestPregunta;
 import com.its.orientaTest.repository.PreguntaRepository;
 import com.its.orientaTest.repository.TestPreguntaRepository;
 import com.its.orientaTest.repository.TestRepository;
-import com.its.orientaTest.mapper.TestPreguntaMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -285,6 +283,7 @@ public class TestPreguntaServiceTest {
     public void testGetResultadosTipoTest_ReturnsEmptyList() {
         Long test_id = 1L;
         String tipoTest = "auto-percepcion";
+    }
     @Test
     public void testGetResultadosTipoTestVocacional_ReturnsEmptyList() {
         Long test_id = 1L;
@@ -293,6 +292,7 @@ public class TestPreguntaServiceTest {
         List<TestPreguntaResponseDTO> result = testPreguntaService.getResultadosTipoTest(test_id, tipoTest);
         assertNotNull(result);
         assertTrue(result.isEmpty());
+    }
       
     @Test
     public void testGetResultadosTipoTestAutopercepcion_ReturnsEmptyList() {
@@ -320,6 +320,7 @@ public class TestPreguntaServiceTest {
         testPregunta2.setPregunta(pregunta2);
         List<TestPregunta> testPreguntas = Arrays.asList(testPregunta1, testPregunta2);
         when(testPreguntaRepository.findByTestIdAndTipoTest(test_id, tipoTest)).thenReturn(testPreguntas);
+    }
 
       public void testGetResultadosTipoTestVocacional_ReturnsListOfDtos() {
         Long test_id = 1L;

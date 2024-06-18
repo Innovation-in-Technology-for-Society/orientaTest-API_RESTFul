@@ -1,6 +1,5 @@
 package com.its.orientaTest.service;
 
-import com.its.orientaTest.model.entities.Test;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -101,7 +100,7 @@ public class TestServiceTest {
     public void testGenerateResultado() {
         // Arrange
         Long testId = 1L;
-        Test test = new Test();
+        com.its.orientaTest.model.entities.Test test = new com.its.orientaTest.model.entities.Test();
         test.setId(testId);
         test.setEstudiante(new Estudiante());
         test.setFechaTest(LocalDateTime.now());
