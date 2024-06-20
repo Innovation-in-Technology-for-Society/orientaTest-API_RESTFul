@@ -1,11 +1,12 @@
 package com.its.orientaTest.service;
+
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.EstudianteMapper;
 import com.its.orientaTest.model.dto.EstudianteRequestDTO;
 import com.its.orientaTest.model.dto.EstudianteResponseDTO;
 import com.its.orientaTest.model.entities.Estudiante;
+import com.its.orientaTest.model.entities.enums.Role;
 import com.its.orientaTest.repository.EstudianteRepository;
-import com.its.orientaTest.exceptions.BadRequestException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,7 +43,7 @@ class EstudianteServiceTest {
 
     @BeforeEach
     void setUp() {
-        estudiante = new Estudiante(1L, "Juan", "Pérez", "juan.perez@example.com", "password", "123456789", "Dirección 123", LocalDateTime.now(), 0);
+        estudiante = new Estudiante(1L, "Juan", "Pérez", "juan.perez@example.com", "password", "123456789", "Dirección 123", LocalDateTime.now(), 0, Role.USER);
         estudianteRequestDTO = new EstudianteRequestDTO("Juan", "Pérez", "juan.perez@example.com", "123456789", "Dirección 123", "password");
         estudianteResponseDTO = new EstudianteResponseDTO(1L, "Juan", "Pérez", "juan.perez@example.com", "123456789", "Dirección 123", LocalDateTime.now(), 0);
     }
@@ -70,33 +70,6 @@ class EstudianteServiceTest {
         assertEquals(1, responseDTOs.size());
         verify(estudianteRepository, times(1)).findAll();
     }
-
-    @Test
-    void testAutenticarEstudiante() {
-        when(estudianteRepository.findByCorreoElectronico(anyString())).thenReturn(Optional.of(estudiante));
-        when(estudianteMapper.toDTO(any(Estudiante.class))).thenReturn(estudianteResponseDTO);
-
-        EstudianteResponseDTO responseDTO = estudianteService.autenticarEstudiante("juan.perez@example.com", "password");
-
-        assertEquals(estudiante.getCorreoElectronico(), responseDTO.getCorreoElectronico());
-        verify(estudianteRepository, times(1)).findByCorreoElectronico(anyString());
-    }
-
-    @Test
-    void testAutenticarEstudiante_NotFound() {
-        when(estudianteRepository.findByCorreoElectronico(anyString())).thenReturn(Optional.empty());
-
-        assertThrows(ResourceNotFoundException.class, () -> estudianteService.autenticarEstudiante("juan.perez@example.com", "password"));
-    }
-
-    @Test
-    void testAutenticarEstudiante_IncorrectPassword() {
-        estudiante.setContrasenia("wrong_password");
-        when(estudianteRepository.findByCorreoElectronico(anyString())).thenReturn(Optional.of(estudiante));
-
-        assertThrows(BadRequestException.class, () -> estudianteService.autenticarEstudiante("juan.perez@example.com", "password"));
-    }
-
     @Test
     void testActualizarEstudiante() {
         when(estudianteRepository.findById(anyLong())).thenReturn(Optional.of(estudiante));
