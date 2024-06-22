@@ -20,12 +20,11 @@ public class EstudianteController {
 
     private final EstudianteService estudianteService;
 
-    @PostMapping
+    @PostMapping("/registro")
     public ResponseEntity<EstudianteResponseDTO> createEstudiante(@Validated @RequestBody EstudianteRequestDTO estudianteRequestDTO){
         EstudianteResponseDTO createdEstudiante = estudianteService.createEstudiante(estudianteRequestDTO);
         return new ResponseEntity<>(createdEstudiante, HttpStatus.CREATED);
     }
-
     
     @GetMapping("/lista")
     public ResponseEntity<List<EstudianteResponseDTO>> getAllEstudiantes(){

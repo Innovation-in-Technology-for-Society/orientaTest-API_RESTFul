@@ -67,7 +67,6 @@ public class EstudianteService {
         // Convertir el estudiante actualizado a EstudianteResponseDTO
         return estudianteMapper.toDTO(estudiante);
     }
-
     public EstudianteResponseDTO findByEmail(String email) {
         Estudiante estudiante = estudianteRepository.findByCorreoElectronico(email)
                 .orElseThrow(() -> new ResourceNotFoundException("Estudiante no encontrado con correo: " + email));
