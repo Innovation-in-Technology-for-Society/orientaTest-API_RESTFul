@@ -24,7 +24,7 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/api/v1/auth/token", "/auth/login", "/api/v1/estudiantes", "/estudiantes", "/auth/token").permitAll() // Permitir sin autenticación
+                .requestMatchers("/api/v1/auth/token", "/auth/login", "/api/v1/estudiantes", "/estudiantes/registro", "/auth/token").permitAll() // Permitir sin autenticación
                 .requestMatchers("/api/v1/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/webjars/**").permitAll() // Rutas adicionales
                 .anyRequest().authenticated() // Cualquier otra solicitud requiere autenticación
             )
