@@ -137,5 +137,4 @@ public class UniversidadServiceTest {
         assertEquals(dto1, result.get(0));
         assertEquals(dto2, result.get(1));
     }
-
 }
