@@ -1,5 +1,4 @@
 package com.its.orientaTest.service;
-import com.its.orientaTest.model.dto.PreguntaResponseDTO;
 import java.util.stream.Collectors;
 import com.its.orientaTest.exceptions.ResourceNotFoundException;
 import com.its.orientaTest.mapper.TestPreguntaMapper;
@@ -19,6 +18,7 @@ import com.its.orientaTest.repository.ResultadoRepository;
 import com.its.orientaTest.repository.TestPreguntaRepository;
 import com.its.orientaTest.repository.TestRepository;
 import com.its.orientaTest.repository.UniversidadRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
@@ -153,15 +153,5 @@ public class TestPreguntaService {
         return preguntas.stream()
                 .map(testPreguntaMapper::toResponseDTO)
                 .collect(Collectors.toList());
-    }
-  
-    private TestPreguntaResponseDTO mapToResponseDTO(TestPregunta testPregunta) {
-        TestPreguntaResponseDTO dto = testPreguntaMapper.toDTO(testPregunta);
-        Pregunta pregunta = testPregunta.getPregunta();
-        PreguntaResponseDTO preguntaDTO = new PreguntaResponseDTO();
-        preguntaDTO.setId(pregunta.getId());
-        preguntaDTO.setEnunciado(pregunta.getEnunciado());
-        dto.setPregunta_id(preguntaDTO);
-        return dto;
     }
 }

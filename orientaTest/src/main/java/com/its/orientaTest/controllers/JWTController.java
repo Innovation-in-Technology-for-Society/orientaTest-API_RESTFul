@@ -13,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,4 +50,14 @@ public class JWTController {
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                 .body(authResponse);
     }
+    @GetMapping("/user/id")
+    public ResponseEntity<Long> getUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        EstudianteResponseDTO estudiante = authService.findByEmail(userDetails.getUsername());
+        Long userId = estudiante.getId(); // Suponiendo que tienes un método getId() en EstudianteResponseDTO
+        return ResponseEntity.ok(userId);
+}
+
+
 }
