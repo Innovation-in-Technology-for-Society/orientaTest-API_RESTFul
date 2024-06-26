@@ -11,4 +11,6 @@ public interface EstudianteRepository extends JpaRepository<Estudiante, Long>{
     Optional<Estudiante> findByNombreApellido(String nombre, String apellido);
     @Query("SELECT e FROM Estudiante e WHERE e.correoElectronico = ?1")
     Optional<Estudiante> findByCorreoElectronico(String correoElectronico);
+
+    boolean existsByCorreoElectronico(String correoElectronico);
 }

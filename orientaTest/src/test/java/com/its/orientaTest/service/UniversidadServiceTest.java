@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import java.util.Optional;
@@ -30,14 +29,18 @@ public class UniversidadServiceTest {
 
     @InjectMocks
     private UniversidadService universidadService;
-    private Universidad universidad;
-    private UniversidadResponseDTO universidadResponseDTO;
 
     @Test
     void testGetAllUniversidades() {
+        // Mock de datos de prueba
+        Universidad universidad = new Universidad(1L, "Universidad XYZ", "xyz@example.com", "123456789", "Ubicación XYZ", 5, "Beneficio XYZ");
+        UniversidadResponseDTO universidadResponseDTO = new UniversidadResponseDTO(1L, "Universidad XYZ", "xyz@example.com", "123456789", "Ubicación XYZ", 5);
+        // Configuración del comportamiento de los mocks
         when(universidadRepository.findAll()).thenReturn(Collections.singletonList(universidad));
         when(universidadMapper.toListDTO(anyList())).thenReturn(Collections.singletonList(universidadResponseDTO));
+        // Ejecución del método bajo prueba
         List<UniversidadResponseDTO> responseDTOList = universidadService.getAllUniversidades();
+        // Verificación de resultados
         assertNotNull(responseDTOList);
         assertFalse(responseDTOList.isEmpty());
         assertEquals(1, responseDTOList.size());
@@ -47,6 +50,8 @@ public class UniversidadServiceTest {
         assertEquals("123456789", responseDTO.getTelefono());
         assertEquals("Ubicación XYZ", responseDTO.getUbicacion());
         assertEquals(5, responseDTO.getRanking());
+
+        // Verificación de interacciones con los mocks
         verify(universidadRepository, times(1)).findAll();
     }
 
@@ -132,5 +137,4 @@ public class UniversidadServiceTest {
         assertEquals(dto1, result.get(0));
         assertEquals(dto2, result.get(1));
     }
-
 }

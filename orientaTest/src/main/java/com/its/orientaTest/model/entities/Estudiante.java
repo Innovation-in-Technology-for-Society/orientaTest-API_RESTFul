@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+import com.its.orientaTest.model.entities.enums.Role;
+
 @Entity
 @Table(name = "estudiante")
 @Data
@@ -40,4 +42,7 @@ public class Estudiante {
 
     @Column(name = "intentos_test", nullable = false)
     private Integer intentosTest;
+
+    @Enumerated(EnumType.STRING)
+    private Role rol;
 }

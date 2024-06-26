@@ -20,13 +20,13 @@ public class EstudianteController {
 
     private final EstudianteService estudianteService;
 
-    @PostMapping
+    @PostMapping("/registro")
     public ResponseEntity<EstudianteResponseDTO> createEstudiante(@Validated @RequestBody EstudianteRequestDTO estudianteRequestDTO){
         EstudianteResponseDTO createdEstudiante = estudianteService.createEstudiante(estudianteRequestDTO);
         return new ResponseEntity<>(createdEstudiante, HttpStatus.CREATED);
     }
-
-    @GetMapping
+    
+    @GetMapping("/lista")
     public ResponseEntity<List<EstudianteResponseDTO>> getAllEstudiantes(){
         List<EstudianteResponseDTO> estudiantes = estudianteService.getAllEstudiantes();
         return new ResponseEntity<>(estudiantes, HttpStatus.OK);
@@ -36,19 +36,6 @@ public class EstudianteController {
     public ResponseEntity<Void> deleteEstudiante(@PathVariable Long id){
         estudianteService.deleteEstudiante(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @PostMapping("/autenticar")
-    public ResponseEntity<EstudianteResponseDTO> autenticarEstudiante(@RequestBody EstudianteRequestDTO estudianteRequestDTO) {
-        // Obtener los datos de correo y contraseña del cuerpo de la solicitud
-        String correoElectronico = estudianteRequestDTO.getCorreoElectronico();
-        String contrasenia = estudianteRequestDTO.getContrasenia();
-        
-        // Autentica al estudiante
-        EstudianteResponseDTO estudianteAutenticado = estudianteService.autenticarEstudiante(correoElectronico, contrasenia);
-        
-        // Devuelve los datos del estudiante autenticado
-        return ResponseEntity.ok(estudianteAutenticado);
     }
 
     @PutMapping("/{id}")
