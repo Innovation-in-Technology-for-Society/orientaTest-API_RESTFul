@@ -1,0 +1,13 @@
+com\its\orientaTest\controllers\UniversidadControllerIntegrationTest.class
+com\its\orientaTest\controllers\TestControllerIntegrationTest.class
+com\its\orientaTest\controllers\TestPreguntaControllerIntegrationTest.class
+com\its\orientaTest\service\TestServiceTest.class
+com\its\orientaTest\service\EstudianteServiceTest.class
+com\its\orientaTest\controllers\CarreraControllerIntegrationTest.class
+com\its\orientaTest\service\CarreraServiceTest.class
+com\its\orientaTest\controllers\ResultadoControllerIntegrationTest.class
+com\its\orientaTest\OrientaTestApplicationTests.class
+com\its\orientaTest\service\UniversidadServiceTest.class
+com\its\orientaTest\service\ResultadoServiceTest.class
+com\its\orientaTest\controllers\EstudianteControllerIntegrationTest.class
+com\its\orientaTest\service\TestPreguntaServiceTest.class

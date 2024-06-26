@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.its</groupId>
 	<artifactId>orientaTest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>orientaTest</name>
 	<description>SpringBoot project for OrientaTest</description>
 	<properties>
